@@ -24,7 +24,7 @@ ijkprof/android-ndk-profiler/
 # generated files
 bin/
 gen/
-libs/
+#libs/
 obj/
 ijkmedia/ijkplayer/ijkversion.h
 
