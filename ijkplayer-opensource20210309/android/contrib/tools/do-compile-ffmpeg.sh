@@ -40,7 +40,7 @@ fi
 
 
 FF_BUILD_ROOT=`pwd`
-FF_ANDROID_PLATFORM=android-23
+FF_ANDROID_PLATFORM=android-21
 
 
 FF_BUILD_NAME=
@@ -291,6 +291,9 @@ case "$FF_BUILD_OPT" in
         FF_CFG_FLAGS="$FF_CFG_FLAGS --enable-small"
     ;;
 esac
+
+#尝试解决Android 21 编译报错的问题：undefined reference to 'stdout'
+FF_EXTRA_CFLAGS="$FF_EXTRA_CFLAGS -D__ANDROID_API__=21"
 
 #--------------------
 echo ""

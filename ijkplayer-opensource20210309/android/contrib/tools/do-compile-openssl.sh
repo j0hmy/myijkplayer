@@ -38,8 +38,8 @@ FF_BUILD_ROOT=`pwd`
 #MacOs，ERROR: Failed to create toolchain. 报错，为了解决改为android-16
 #搞定了，我查了一下tools/do-compile-ffmpeg.s：43行给定的android api版本是9,我升级到21之后，
 #Library/Android/sdk/ndk-bundle/build/tools/make-standalone-toolchain.sh 中会调用
-#Library/Android/sdk/ndk-bundle/build/tools/make-standalone-toolchain.py，这个内部限定了最低版本要在16,所以引发的崩溃，我现在修改了43行为FF_ANDROID_PLATFORM=android-16,就可以了。
-FF_ANDROID_PLATFORM=android-23
+#Library/Android/sdk/ndk-bundle/build/tools/make-standalone-toolchain.py，这个内部限定了最低版本要在16,所以引发的崩溃，我现在修改了43行为FF_ANDROID_PLATFORM=android-21,就可以了。
+FF_ANDROID_PLATFORM=android-21
 
 
 FF_BUILD_NAME=
@@ -171,6 +171,8 @@ FF_CFG_FLAGS="$FF_CFG_FLAGS no-shared"
 FF_CFG_FLAGS="$FF_CFG_FLAGS --openssldir=$FF_PREFIX"
 FF_CFG_FLAGS="$FF_CFG_FLAGS --cross-compile-prefix=${FF_CROSS_PREFIX}-"
 FF_CFG_FLAGS="$FF_CFG_FLAGS $FF_PLATFORM_CFG_FLAGS"
+#尝试解决Android 21 编译报错的问题：undefined reference to 'stdout'
+FF_CFG_FLAGS="$FF_CFG_FLAGS -D__ANDROID_API__=21"
 
 #--------------------
 echo ""
